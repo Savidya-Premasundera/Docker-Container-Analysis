@@ -1,13 +1,16 @@
 docker container ls
 
-CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS                    NAMES
-848dcefc1625   dockerexercise-service1   "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes   0.0.0.0:8199->8199/tcp   dockerexercise-service1-1
-3ec7e39174e1   dockerexercise-service2   "python Service2.py"     4 minutes ago   Up 4 minutes   5000/tcp                 dockerexercise-service2-1
-
+CONTAINER ID   IMAGE                                COMMAND                  CREATED         STATUS         PORTS                            NAMES
+d510c10d4216   nginx:latest                         "/docker-entrypoint.…"   2 minutes ago   Up 2 minutes   80/tcp, 0.0.0.0:8198->8198/tcp   docker-container-analysis-nginx-1
+61f6be4fb78a   docker-container-analysis-service1   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   8199/tcp                         docker-container-analysis-service1-2
+b6af42d0f074   docker-container-analysis-service1   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   8199/tcp                         docker-container-analysis-service1-3
+e1508a7bfa5b   docker-container-analysis-service1   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   8199/tcp                         docker-container-analysis-service1-1
+f4dd06ef5bc1   docker-container-analysis-service2   "python Service2.py"     2 minutes ago   Up 2 minutes   5000/tcp                         docker-container-analysis-service2-1
 
 docker network ls
 
-NETWORK ID     NAME                              DRIVER    SCOPE
-4f91c31fe501   bridge                            bridge    local
-513177aca3d1   dockerexercise_internal_network   bridge    local
-c326ac74d0c7   host                              host      local
+NETWORK ID     NAME                                         DRIVER    SCOPE
+3581a606babf   bridge                                       bridge    local
+89b5d609f5b3   docker-container-analysis_internal_network   bridge    local
+c326ac74d0c7   host                                         host      local
+03761c68d996   none                                         null      local

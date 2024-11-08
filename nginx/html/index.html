@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Interface</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        textarea {
+            width: 600px;
+            height: 400px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            padding: 10px;
+            resize: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 120px;
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        async function sendRequest() {
+            try {
+                const response = await fetch('/api/request', { method: 'GET' });
+                const data = await response.json();
+                document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('output').textContent = "Error: " + error.message;
+            }
+        }
+
+        async function stopServices() {
+            await fetch('/api/stop', { method: 'POST' });
+            document.getElementById('output').value = "Services stopped.";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <textarea id="output" readonly></textarea>
+        <br>
+        <button onclick="sendRequest()">REQUEST</button>
+        <button onclick="stopServices()">STOP</button>
+    </div>
+</body>
+
+</html>

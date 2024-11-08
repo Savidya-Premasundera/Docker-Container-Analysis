@@ -30,7 +30,7 @@ function formatServiceDetails(serviceName, info) {
   };
 }
 
-app.get('/', async (req, res) => {
+app.get('/api/request', async (req, res) => {
 
   const service1Info = getSystemDetails();
 
@@ -44,8 +44,19 @@ app.get('/', async (req, res) => {
       ...formattedService1,
       ...formattedService2
     });
+    await new Promise(resolve => setTimeout(resolve, 2000));
   } catch (error) {
     res.status(500).json({ error: 'Error contacting Service2', details: error.message });
+  }
+});
+
+app.post('/api/stop', async (req, res) => {
+  try {
+    execSync('/app/docker_stop.sh');
+    res.send({ message: 'Services stopped successfully.' });
+  } catch (error) {
+    console.error(`Error executing stop script: ${error}`);
+    res.status(500).send({ error: 'Failed to stop services.' });
   }
 });
 
